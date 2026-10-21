@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", "module": "NodeNext", "moduleResolution": "NodeNext",
+    "rootDir": "src", "outDir": "dist", "strict": true, "declaration": true,
+    "skipLibCheck": true, "verbatimModuleSyntax": true, "jsx": "react",
+    "lib": ["ES2022", "DOM", "ESNext.Decorators"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}
