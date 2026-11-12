@@ -1,6 +1,6 @@
 {
   "name": "dsh-git-visual",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Git graph, diffs, staging, commits and branch switching inside DeepSeek Harness",
   "type": "module",
   "license": "MIT",
@@ -22,7 +22,7 @@
   ],
   "engines": {
     "node": ">=22.19.0",
-    "dsh": "0.2.1-rc.2"
+    "dsh": "0.2.2-rc.1"
   },
   "dsh": {
     "bundle": {
@@ -40,9 +40,9 @@
     }
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "~4.0.5",
-    "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.2",
-    "@deepseek-ai/dsh-workspace": "0.2.1-rc.2"
+    "@deepseek-ai/cordis": "~4.1.0",
+    "@deepseek-ai/dsh-typert-protocol": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-workspace": "0.2.2-rc.1"
   },
   "devDependencies": {
     "@types/node": "^22.19.0",
@@ -54,10 +54,12 @@
     "react-dom": "^18.3.1",
     "jsdom": "^26.1.0",
     "@testing-library/react": "^16.3.0",
-    "@deepseek-ai/cordis-plugin-include": "1.0.10",
-    "@deepseek-ai/dsh-api-gateway": "0.2.1-rc.2",
-    "@deepseek-ai/dsh-typert-registry": "0.2.1-rc.2",
-    "yaml": "^2.8.1"
+    "@deepseek-ai/cordis-plugin-include": "1.1.0",
+    "@deepseek-ai/dsh-api-gateway": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-typert-registry": "0.2.2-rc.1",
+    "yaml": "^2.8.1",
+    "@deepseek-ai/dsh-app-boot": "0.2.2-rc.1",
+    "@deepseek-ai/cordis": "4.1.0"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json && node scripts/build.mjs",

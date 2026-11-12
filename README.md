@@ -1,6 +1,6 @@
 # Harness Git 可视化插件
 
-适配 **DeepSeek Harness 0.2.1-rc.2**，在会话右侧标签页提供 Git 仓库面板。
+适配 **DeepSeek Harness 0.2.2-rc.1**，在会话右侧标签页提供 Git 仓库面板。
 
 ## 功能
 
@@ -34,16 +34,16 @@
 桌面版进入应用内的“插件”安装页，输入这个 GitHub 安装地址：
 
 ```text
-git+https://github.com/charlesjson/dsh-git-visual.git#v0.2.0
+git+https://github.com/charlesjson/dsh-git-visual.git#v0.3.0
 ```
 
 仓库包含 `dist/` 运行文件，安装时无需手动编译源码。桌面版的专有 `desktop` profile 应通过桌面应用自身管理。
-也可以直接安装 [GitHub Release 安装包](https://github.com/charlesjson/dsh-git-visual/releases/download/v0.2.0/dsh-git-visual-0.2.0.tgz)。
+也可以直接安装 [GitHub Release 安装包](https://github.com/charlesjson/dsh-git-visual/releases/download/v0.3.0/dsh-git-visual-0.3.0.tgz)。
 
 Web 版可使用其插件页，或运行：
 
 ```sh
-dsh plugin --profile web add "git+https://github.com/charlesjson/dsh-git-visual.git#v0.2.0"
+dsh plugin --profile web add "git+https://github.com/charlesjson/dsh-git-visual.git#v0.3.0"
 ```
 
 Web 和桌面版共享会话时，插件仍分别安装到各自 profile。
