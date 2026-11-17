@@ -1,6 +1,6 @@
 {
   "name": "dsh-git-visual",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Git graph, diffs, staging, commits and branch switching inside DeepSeek Harness",
   "type": "module",
   "license": "MIT",
@@ -22,7 +22,7 @@
   ],
   "engines": {
     "node": ">=22.19.0",
-    "dsh": "0.2.2-rc.1"
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0"
   },
   "dsh": {
     "bundle": {
@@ -41,8 +41,8 @@
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "~4.1.0",
-    "@deepseek-ai/dsh-typert-protocol": "0.2.2-rc.1",
-    "@deepseek-ai/dsh-workspace": "0.2.2-rc.1"
+    "@deepseek-ai/dsh-typert-protocol": ">=0.2.2-rc.1 <0.3.0-0",
+    "@deepseek-ai/dsh-workspace": ">=0.2.2-rc.1 <0.3.0-0"
   },
   "devDependencies": {
     "@types/node": "^22.19.0",
@@ -58,7 +58,7 @@
     "@deepseek-ai/dsh-api-gateway": "0.2.2-rc.1",
     "@deepseek-ai/dsh-typert-registry": "0.2.2-rc.1",
     "yaml": "^2.8.1",
-    "@deepseek-ai/dsh-app-boot": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-app-boot": "0.2.2-rc.2",
     "@deepseek-ai/cordis": "4.1.0"
   },
   "scripts": {
@@ -66,7 +66,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "npm run build && node --test test/*.test.mjs",
     "preview": "node scripts/preview.mjs",
-    "prepack": "npm run build"
+    "prepack": "node --test test/compatibility.test.mjs && npm run build"
   },
   "author": "charlesjson",
   "repository": {

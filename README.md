@@ -1,6 +1,6 @@
 # Harness Git 可视化插件
 
-适配 **DeepSeek Harness 0.2.2-rc.1**，在会话右侧标签页提供 Git 仓库面板。
+适配 **DeepSeek Harness 0.2.2-rc.1 及后续 0.2.x 版本**，在会话右侧标签页提供 Git 仓库面板。
 
 ## 功能
 
@@ -34,16 +34,16 @@
 桌面版进入应用内的“插件”安装页，输入这个 GitHub 安装地址：
 
 ```text
-git+https://github.com/charlesjson/dsh-git-visual.git#v0.3.0
+git+https://github.com/charlesjson/dsh-git-visual.git#v0.3.1
 ```
 
 仓库包含 `dist/` 运行文件，安装时无需手动编译源码。桌面版的专有 `desktop` profile 应通过桌面应用自身管理。
-也可以直接安装 [GitHub Release 安装包](https://github.com/charlesjson/dsh-git-visual/releases/download/v0.3.0/dsh-git-visual-0.3.0.tgz)。
+也可以直接安装 [GitHub Release 安装包](https://github.com/charlesjson/dsh-git-visual/releases/download/v0.3.1/dsh-git-visual-0.3.1.tgz)。
 
 Web 版可使用其插件页，或运行：
 
 ```sh
-dsh plugin --profile web add "git+https://github.com/charlesjson/dsh-git-visual.git#v0.3.0"
+dsh plugin --profile web add "git+https://github.com/charlesjson/dsh-git-visual.git#v0.3.1"
 ```
 
 Web 和桌面版共享会话时，插件仍分别安装到各自 profile。
@@ -93,3 +93,13 @@ npm run preview
 
 文本差异最多读取约 2 MB，界面最多渲染 2000 行；大文件会显示截断提示。
 提交图与历史差异默认比较合并提交的第一个父提交。
+
+## DSH 兼容声明
+
+`engines.dsh` 与所有 DSH peer 依赖统一声明为 `>=0.2.2-rc.1 <0.3.0-0`。
+同一 0.2 系列的后续 RC、补丁和正式版本不再因为精确版本声明而被禁用；
+`0.3.0`（含预发布版）及更高版本需要重新验证。开发依赖和锁文件用于固定测试基线，
+不代表宿主只能运行该基线版本。兼容范围检查不等于未来接口已验证。
+
+本次在 DSH `0.2.2-rc.2` 的实际兼容检查器下验证，
+`npm test` 包含当前 RC、后续 0.2 版本和 0.3 预发布上限的回归检查。
