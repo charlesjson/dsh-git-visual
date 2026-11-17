@@ -1,3 +1,4 @@
+import { hostMethodsAvailable } from './host-api.js'
 import React from 'react'
 import type { GitCall, GitRequest } from './types.js'
 import { GitIcon, GitPanel } from './panel.js'
@@ -21,6 +22,7 @@ function GitGuide({ useTabInfo }: GuideProps) {
 function GitTitle() { return <span className="gv-tab-title"><GitIcon size={15}/>Git</span> }
 
 export function apply(ctx: ClientContext): void {
+  if (!hostMethodsAvailable('dsh-git-visual/client', ctx, ['effect', 'slots.inject', 'slots.register', 'sidebarRightTabs.register', 'connection.rpc.call'])) return
   const id = 'dsh-git-visual'
   ctx.effect(() => {
     const style = document.createElement('style'); style.dataset.plugin = id; style.textContent = css; document.head.appendChild(style)

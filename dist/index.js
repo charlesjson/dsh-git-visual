@@ -32,6 +32,7 @@ var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, 
     if (target) Object.defineProperty(target, contextIn.name, descriptor);
     done = true;
 };
+import { assertHostMethods } from './host-api.js';
 import { Remote, RemoteError, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol';
 import { commitDetail, diff, GitError, mutate, repositoryRoot, snapshot } from './git.js';
 export const name = 'git-visual';
@@ -86,4 +87,7 @@ let GitVisualService = (() => {
     };
 })();
 export { GitVisualService };
-export async function apply(ctx) { await ctx.plugin(GitVisualService); }
+export async function apply(ctx) {
+    assertHostMethods('dsh-git-visual', ctx, ['plugin', 'workspaceRegistry.list']);
+    await ctx.plugin(GitVisualService);
+}

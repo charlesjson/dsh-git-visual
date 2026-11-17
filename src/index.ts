@@ -1,3 +1,4 @@
+import { assertHostMethods } from './host-api.js'
 import type { Context } from '@deepseek-ai/cordis'
 import { Remote, RemoteError, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
 import type {} from '@deepseek-ai/dsh-workspace'
@@ -37,4 +38,7 @@ export class GitVisualService extends TypertRemoteService {
   }
 }
 
-export async function apply(ctx: Context): Promise<void> { await ctx.plugin(GitVisualService) }
+export async function apply(ctx: Context): Promise<void> {
+  assertHostMethods('dsh-git-visual', ctx, ['plugin', 'workspaceRegistry.list'])
+  await ctx.plugin(GitVisualService)
+}

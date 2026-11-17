@@ -36,6 +36,35 @@ __export(client_exports, {
   name: () => name
 });
 module.exports = __toCommonJS(client_exports);
+
+// src/host-api.ts
+function assertHostMethods(plugin, host, methods) {
+  const missingMethods = methods.filter((path) => {
+    let value = host;
+    for (const key of path.split(".")) {
+      if (value === null || typeof value !== "object" && typeof value !== "function") return true;
+      value = Reflect.get(value, key);
+    }
+    return typeof value !== "function";
+  });
+  if (missingMethods.length) {
+    throw Object.assign(new Error(`[${plugin}] \u5F53\u524D DSH \u7F3A\u5C11\u5FC5\u9700\u63A5\u53E3\uFF1A${missingMethods.join("\u3001")}\u3002\u8BF7\u5347\u7EA7\u63D2\u4EF6\u4EE5\u9002\u914D\u5F53\u524D DSH\u3002`), {
+      code: "DSH_API_UNSUPPORTED",
+      missingMethods
+    });
+  }
+}
+function hostMethodsAvailable(plugin, host, methods) {
+  try {
+    assertHostMethods(plugin, host, methods);
+    return true;
+  } catch (error) {
+    console.warn(error instanceof Error ? error.message : error);
+    return false;
+  }
+}
+
+// src/client.tsx
 var import_react6 = __toESM(require("react"), 1);
 
 // src/panel.tsx
@@ -652,6 +681,7 @@ function GitTitle() {
   return /* @__PURE__ */ import_react6.default.createElement("span", { className: "gv-tab-title" }, /* @__PURE__ */ import_react6.default.createElement(GitIcon, { size: 15 }), "Git");
 }
 function apply(ctx) {
+  if (!hostMethodsAvailable("dsh-git-visual/client", ctx, ["effect", "slots.inject", "slots.register", "sidebarRightTabs.register", "connection.rpc.call"])) return;
   const id = "dsh-git-visual";
   ctx.effect(() => {
     const style = document.createElement("style");

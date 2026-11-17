@@ -1,6 +1,6 @@
 # Harness Git 可视化插件
 
-适配 **DeepSeek Harness 0.2.2-rc.1 及后续 0.2.x 版本**，在会话右侧标签页提供 Git 仓库面板。
+适配 **DeepSeek Harness 0.2.2-rc.1 起的版本（按所需接口检查兼容性）**，在会话右侧标签页提供 Git 仓库面板。
 
 ## 功能
 
@@ -34,16 +34,16 @@
 桌面版进入应用内的“插件”安装页，输入这个 GitHub 安装地址：
 
 ```text
-git+https://github.com/charlesjson/dsh-git-visual.git#v0.3.1
+git+https://github.com/charlesjson/dsh-git-visual.git#v0.3.2
 ```
 
 仓库包含 `dist/` 运行文件，安装时无需手动编译源码。桌面版的专有 `desktop` profile 应通过桌面应用自身管理。
-也可以直接安装 [GitHub Release 安装包](https://github.com/charlesjson/dsh-git-visual/releases/download/v0.3.1/dsh-git-visual-0.3.1.tgz)。
+也可以直接安装 [GitHub Release 安装包](https://github.com/charlesjson/dsh-git-visual/releases/download/v0.3.2/dsh-git-visual-0.3.2.tgz)。
 
 Web 版可使用其插件页，或运行：
 
 ```sh
-dsh plugin --profile web add "git+https://github.com/charlesjson/dsh-git-visual.git#v0.3.1"
+dsh plugin --profile web add "git+https://github.com/charlesjson/dsh-git-visual.git#v0.3.2"
 ```
 
 Web 和桌面版共享会话时，插件仍分别安装到各自 profile。
@@ -96,10 +96,14 @@ npm run preview
 
 ## DSH 兼容声明
 
-`engines.dsh` 与所有 DSH peer 依赖统一声明为 `>=0.2.2-rc.1 <0.3.0-0`。
-同一 0.2 系列的后续 RC、补丁和正式版本不再因为精确版本声明而被禁用；
-`0.3.0`（含预发布版）及更高版本需要重新验证。开发依赖和锁文件用于固定测试基线，
-不代表宿主只能运行该基线版本。兼容范围检查不等于未来接口已验证。
+宿主与 DSH peer 依赖统一声明为 `>=0.2.2-rc.1`，只保留最低版本，不再设置未来版本上限。
+Cordis peer 同样只保留已验证的最低版本；开发依赖与锁文件仍固定测试基线。
+以后升级到 0.3、1.0 或更高版本时，不会仅因版本号变化被本插件声明禁用。
 
-本次在 DSH `0.2.2-rc.2` 的实际兼容检查器下验证，
-`npm test` 包含当前 RC、后续 0.2 版本和 0.3 预发布上限的回归检查。
+插件在注册功能前检查其依赖的宿主方法；前端插件也会在注册界面前检查方法。
+缺少必需方法时会报告 `DSH_API_UNSUPPORTED` 和具体接口名称，不会先留下部分注册。
+新增无关接口不影响加载。缺少已声明的注入服务或模块导出时，宿主加载器会报告相应依赖错误。
+方法存在性检查无法证明参数、返回值、事件结构或行为语义完全不变；这类变更仍可能需要适配。
+
+`npm test` 与 `npm pack` 使用真实 DSH 兼容检查器覆盖最低版本和未来主版本号；
+未来版本矩阵检查的是声明策略，不代表尚未发布的宿主已经经过集成测试。
